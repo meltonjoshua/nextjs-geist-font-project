@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import { getSession } from '@/lib/auth';
-import { getUsers, createUser, updateUser, deleteUser, getUserByEmail } from '@/lib/db';
+import { getUsers, createUser, updateUser, deleteUser, getUserByEmail, User } from '@/lib/db';
 import { randomUUID } from 'crypto';
 
 export async function GET(request: NextRequest) {
@@ -57,10 +57,10 @@ export async function PUT(request: NextRequest) {
     if (!id) {
       return NextResponse.json({ error: 'User ID is required' }, { status: 400 });
     }
-    const updates: Record<string, string> = {};
+    const updates: Partial<User> = {};
     if (name) updates.name = name;
     if (email) updates.email = email;
-    if (role) updates.role = role;
+    if (role) updates.role = role as 'admin' | 'contractor';
     if (password) updates.password = await bcrypt.hash(password, 10);
     updateUser(id, updates);
     return NextResponse.json({ success: true });

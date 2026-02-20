@@ -29,6 +29,7 @@ export default function ContractorDashboard() {
   const router = useRouter();
   const [isClockedIn, setIsClockedIn] = useState(false);
   const [records, setRecords] = useState<ClockRecord[]>([]);
+  const [sortedRecords, setSortedRecords] = useState<ClockRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState(false);
   const [message, setMessage] = useState('');
@@ -45,7 +46,9 @@ export default function ContractorDashboard() {
     const clockData = await clockRes.json();
     const recordsData = await recordsRes.json();
     setIsClockedIn(clockData.isClockedIn);
-    setRecords(recordsData.records || []);
+    const fetched: ClockRecord[] = recordsData.records || [];
+    setRecords(fetched);
+    setSortedRecords([...fetched].reverse());
     setLoading(false);
   }, [router]);
 
@@ -151,7 +154,7 @@ export default function ContractorDashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {[...records].reverse().map((r) => (
+                  {sortedRecords.map((r) => (
                     <tr key={r.id} className="border-b border-gray-100 hover:bg-gray-50">
                       <td className="py-3 px-2 text-gray-700">{new Date(r.clockIn).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}</td>
                       <td className="py-3 px-2 text-gray-700">{formatDateTime(r.clockIn)}</td>

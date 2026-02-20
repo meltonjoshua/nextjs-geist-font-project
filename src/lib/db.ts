@@ -22,8 +22,15 @@ export interface ClockRecord {
 
 function readFile<T>(filename: string): T {
   const filePath = path.join(DATA_DIR, filename);
-  const raw = fs.readFileSync(filePath, 'utf-8');
-  return JSON.parse(raw) as T;
+  try {
+    const raw = fs.readFileSync(filePath, 'utf-8');
+    return JSON.parse(raw) as T;
+  } catch (err) {
+    if ((err as NodeJS.ErrnoException).code === 'ENOENT') {
+      throw new Error(`Data file not found: ${filename}`);
+    }
+    throw new Error(`Failed to read or parse ${filename}: ${String(err)}`);
+  }
 }
 
 function writeFile<T>(filename: string, data: T): void {
