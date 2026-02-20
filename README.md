@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Suffolk Cleaning Agency
+
+A full-stack Next.js website for Suffolk Cleaning Agency, featuring a public-facing marketing site, a contractor clock in/out portal, and an admin management dashboard.
+
+## Features
+
+### Public Website
+- **Home** – Hero section, services overview, testimonials, and call-to-action
+- **Services** – Detailed listing of all cleaning services offered
+- **About** – Company story, values, and team information
+- **Contact** – Contact form and company contact details
+
+### Contractor Portal (`/contractor`)
+- Secure login for contractors
+- Clock in / Clock out with one click
+- View personal time records and session history
+
+### Admin Portal (`/admin`)
+- Secure admin-only login
+- Dashboard with live stats (total users, active sessions, today's records)
+- **User Management** – Add, edit, and delete contractors and admins
+- **Time Records** – View and filter all contractor clock records
 
 ## Getting Started
 
-First, run the development server:
+### 1. Install dependencies
+
+```bash
+npm install
+```
+
+### 2. Set environment variables
+
+Copy `.env.example` to `.env.local` and fill in your values:
+
+```bash
+cp .env.example .env.local
+```
+
+### 3. Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Default Credentials
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Role       | Email                              | Password    |
+|------------|------------------------------------|-------------|
+| Admin      | admin@suffolkcleaning.co.uk        | password123 |
+| Contractor | john@suffolkcleaning.co.uk         | password123 |
 
-## Learn More
+> **Important:** Change these passwords immediately after first login in production.
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/
+  app/
+    page.tsx                  # Home page
+    services/page.tsx         # Services page
+    about/page.tsx            # About page
+    contact/page.tsx          # Contact page
+    contractor/
+      login/page.tsx          # Contractor login
+      dashboard/page.tsx      # Clock in/out dashboard
+    admin/
+      login/page.tsx          # Admin login
+      dashboard/page.tsx      # Admin overview
+      users/page.tsx          # User management
+      records/page.tsx        # All clock records
+    api/                      # API routes
+  components/
+    Navbar.tsx
+    Footer.tsx
+  lib/
+    auth.ts                   # JWT utilities (jose)
+    db.ts                     # File-based JSON storage
+  middleware.ts               # Route protection
+data/
+  users.json                  # User records
+  records.json                # Clock records
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Tech Stack
 
-## Deploy on Vercel
+- **Next.js 16** with App Router
+- **TypeScript**
+- **Tailwind CSS**
+- **jose** – JWT authentication (edge-compatible)
+- **bcryptjs** – Password hashing
+- File-based JSON storage (no external database required)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Environment Variables
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Variable     | Description                                      | Default (dev only)                          |
+|--------------|--------------------------------------------------|---------------------------------------------|
+| `JWT_SECRET` | Secret key for signing JWT tokens (min 32 chars) | `suffolk-cleaning-dev-secret-key-not-for-production` |
+
+> In production, always set a strong `JWT_SECRET`.
