@@ -1,0 +1,18 @@
+[
+  {
+    "id": "1",
+    "name": "Admin User",
+    "email": "admin@suffolkcleaning.co.uk",
+    "password": "$2b$10$2sBUdFv3oi0xhjGJB7cWne6Ot5mS756A4XMsOWd7KKAV5AZGh7.mi",
+    "role": "admin",
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "2",
+    "name": "John Smith",
+    "email": "john@suffolkcleaning.co.uk",
+    "password": "$2b$10$2sBUdFv3oi0xhjGJB7cWne6Ot5mS756A4XMsOWd7KKAV5AZGh7.mi",
+    "role": "contractor",
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  }
+]

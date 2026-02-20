@@ -3,12 +3,10 @@
     "/_app": []
   },
   "devFiles": [],
-  "ampDevFiles": [],
   "polyfillFiles": [],
   "lowPriorityFiles": [
-    "static/development/_ssgManifest.js",
-    "static/development/_buildManifest.js"
+    "static/CL8vX1EtD0QwfK5n5qAPV/_ssgManifest.js",
+    "static/CL8vX1EtD0QwfK5n5qAPV/_buildManifest.js"
   ],
-  "rootMainFiles": [],
-  "ampFirstPages": []
+  "rootMainFiles": []
 }
