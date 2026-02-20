@@ -4,8 +4,8 @@ import { verifyToken } from '@/lib/auth';
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Protect contractor dashboard
-  if (pathname.startsWith('/contractor/dashboard')) {
+  // Protect contractor routes (dashboard + account)
+  if (pathname.startsWith('/contractor/dashboard') || pathname.startsWith('/contractor/account')) {
     const token = request.cookies.get('token')?.value;
     if (!token) {
       return NextResponse.redirect(new URL('/contractor/login', request.url));
@@ -32,5 +32,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/contractor/dashboard', '/admin/:path*'],
+  matcher: ['/contractor/dashboard', '/contractor/account', '/admin/:path*'],
 };

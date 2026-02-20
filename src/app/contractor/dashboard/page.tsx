@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 interface ClockRecord {
   id: string;
@@ -95,12 +96,17 @@ export default function ContractorDashboard() {
           <h1 className="text-xl font-bold">Suffolk Cleaning</h1>
           <p className="text-blue-200 text-sm">Contractor Portal</p>
         </div>
-        <button
-          onClick={handleLogout}
-          className="text-blue-200 hover:text-white text-sm transition-colors"
-        >
-          Sign Out
-        </button>
+        <nav className="flex items-center gap-4 text-sm">
+          <Link href="/contractor/account" className="text-blue-200 hover:text-white transition-colors hidden sm:inline">
+            My Account
+          </Link>
+          <button
+            onClick={handleLogout}
+            className="text-blue-200 hover:text-white transition-colors"
+          >
+            Sign Out
+          </button>
+        </nav>
       </header>
 
       <div className="max-w-4xl mx-auto px-4 py-8">

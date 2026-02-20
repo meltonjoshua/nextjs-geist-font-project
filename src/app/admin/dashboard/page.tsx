@@ -77,6 +77,7 @@ export default function AdminDashboard() {
           <Link href="/admin/dashboard" className="text-white font-medium">Dashboard</Link>
           <Link href="/admin/users" className="text-blue-200 hover:text-white transition-colors">Users</Link>
           <Link href="/admin/records" className="text-blue-200 hover:text-white transition-colors">Records</Link>
+          <Link href="/admin/account" className="text-blue-200 hover:text-white transition-colors">My Account</Link>
           <button onClick={handleLogout} className="text-blue-200 hover:text-white transition-colors">Sign Out</button>
         </nav>
       </header>
